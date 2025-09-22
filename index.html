@@ -3,52 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Приглашение в детский сад KUNSHUAQ</title>
+  <title>Приглашение в наш садик</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
       margin: 0;
-      padding: 0;
+      font-family: 'Nunito', sans-serif;
+      color: #fff;
+      background: linear-gradient(135deg, #8ec5fc 0%, #e0c3fc 100%);
+      background-size: cover;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .container {
-      max-width: 700px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      animation: fadeIn 1.5s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
     }
     h1 {
       text-align: center;
-      color: #4CAF50;
-      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+      color: #fff;
     }
-    p {
+    .logo {
+      display: block;
+      margin: 0 auto 15px auto;
+      width: 100px;
+      border-radius: 20px;
+    }
+    .info {
+      font-size: 0.95rem;
       text-align: center;
-      line-height: 1.5;
+      margin-bottom: 15px;
+      color:#fff;
     }
-    iframe {
+    .photo {
       width: 100%;
-      height: 600px; /* можно подстроить */
+      border-radius: 15px;
+      margin-bottom: 10px;
+    }
+    input[type="text"], input[type="tel"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 10px 0;
       border: none;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.85);
+      font-size: 1rem;
+      color: #333;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(45deg, #ff6ec4, #7873f5);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    .thanks {
+      display:none;
+      text-align:center;
+      font-size:1.1rem;
+      margin-top:10px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Приглашаем в детский сад KUNSHUAQ</h1>
-    <p>
-      Открытие 1 октября!<br>
-      Уютный садик на 50 мест, развивающие программы, питание и забота о каждом ребёнке.<br>
-      Заполните форму ниже, чтобы мы могли связаться с вами.
+    <!-- Логотип JPG -->
+    <img src="logo.jpg" alt="Логотип" class="logo">
+
+    <h1>Открытие нашего садика!</h1>
+    <p class="info">
+      Мы открываем новый современный детский сад!  
+      Приглашаем вас на торжественное открытие – экскурсии, мастер-классы и подарки 🎉
     </p>
 
-    <iframe 
-      src="https://docs.google.com/forms/d/e/1FAIpQLSf3g6pFZ9tG2SqlmFQGqistOPwJ70FT5i58DBrV0Vg-5VBsmg/viewform?embedded=true" 
-      frameborder="0" marginheight="0" marginwidth="0">
-      Загрузка…
-    </iframe>
+    <!-- Фото JPG -->
+    <img src="photo1.jpg" alt="Садик фото 1" class="photo">
+    <img src="photo2.jpg" alt="Садик фото 2" class="photo">
+
+    <!-- Форма -->
+    <form id="inviteForm">
+      <input type="text" name="entry.1204756516" placeholder="Ваше имя" required>
+      <input type="tel" name="entry.64215090" placeholder="Ваш телефон" required>
+      <button type="submit">Отправить</button>
+    </form>
+    <p class="thanks" id="resultMessage">✅ Спасибо! Мы получили вашу заявку.</p>
   </div>
+
+  <script>
+    document.getElementById('inviteForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // отменяем переход
+      const form = this;
+      const formData = new FormData(form);
+
+      fetch('https://docs.google.com/forms/d/e/1FAIpQLSf3g6pFZ9tG2SqlmFQGqistOPwJ70FT5i58DBrV0Vg-5VBsmg/formResponse', {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+      }).then(() => {
+          form.reset();
+          document.getElementById('resultMessage').style.display = 'block';
+      }).catch(() => {
+          alert('Произошла ошибка, попробуйте ещё раз.');
+      });
+    });
+  </script>
 </body>
 </html>
