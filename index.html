@@ -111,8 +111,18 @@
     
     <!-- Форма -->
     <form id="inviteForm">
-      <input type="text" name="entry.1204756516" placeholder="Ваше имя" required>
-      <input type="tel" name="entry.64215090" placeholder="Ваш телефон" required>
+        <input type="text" name="entry.1204756516" placeholder="Ваше имя" required>
+        <input type="tel" name="entry.64215090" placeholder="Ваш телефон" required>
+        <p style="margin-top:10px;color:#fff;font-size:1rem;">Вы планируете прийти?</p>
+        <label style="display:block;margin-bottom:5px;">
+            <input type="radio" name="entry.1494240175" value="Придём" required> Придём
+        </label>
+        <label style="display:block;margin-bottom:5px;">
+            <input type="radio" name="entry.1494240175" value="Подумаем"> Подумаем
+        </label>
+        <label style="display:block;margin-bottom:10px;">
+            <input type="radio" name="entry.1494240175" value="Не придём"> Не придём
+        </label>
       <button type="submit">Отправить</button>
     </form>
     <p class="thanks" id="resultMessage">Спасибо! Ждем вас на открытие садика</p>
@@ -144,5 +154,7 @@
   </script>
 </body>
 </html>
+
+
 
 
